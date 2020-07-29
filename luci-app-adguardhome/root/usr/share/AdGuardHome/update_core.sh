@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 PATH="/usr/sbin:/usr/bin:/sbin:/bin"
 binpath=$(uci get AdGuardHome.AdGuardHome.binpath)
 if [ -z "$binpath" ]; then
@@ -23,7 +23,8 @@ check_wgetcurl(){
 }
 check_latest_version(){
 	check_wgetcurl
-	latest_ver="$($downloader - https://api.github.com/repos/AdguardTeam/AdGuardHome/releases/latest 2>/dev/null|grep -E 'tag_name' |grep -E 'v[0-9.]+' -o 2>/dev/null)"
+	control_ver=`uci get AdGuardHome.AdGuardHome.cversion 2>/dev/null`
+	[ "$control_ver" = "0" -o -z "$control_ver" ] && latest_ver="$($downloader - https://api.github.com/repos/AdguardTeam/AdGuardHome/releases/latest 2>/dev/null|grep -E 'tag_name' |grep -E 'v[0-9.]+' -o 2>/dev/null)" || latest_ver="$control_ver"
 	if [ -z "${latest_ver}" ]; then
 		echo -e "\nFailed to check latest version, please try again later."  && EXIT 1
 	fi
