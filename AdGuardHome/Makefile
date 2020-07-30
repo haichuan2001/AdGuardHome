@@ -1,28 +1,3 @@
-#
-# Copyright (C) 2019 OpenWrt.org
-#
-# Twinzo1 <1282055288@qq.com>
-# KFERMercer <KFER.Mercer@gmail.com>
-# 	
-# This is free software, licensed under the GNU General Public License v3.
-#
-
-include $(TOPDIR)/rules.mk
-
-PKG_NAME:=AdGuardHome
-PKG_VERSION:=0.102.0
-PKG_RELEASE:=1
-PKG_LICENSE:=GPL-3.0
-
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/AdguardTeam/AdGuardHome.git
-PKG_SOURCE_VERSION:=bab7b2dc65004d7c9661a590965f710584f063b9
-
-PKG_SOURCE_SUBDIR:=$(PKG_NAME)
-PKG_SOURCE:=$(PKG_SOURCE_SUBDIR)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_SOURCE_SUBDIR)
-
-PKG_BUILD_DEPENDS:=golang/host#
 # Copyright (C) 2019 OpenWrt.org
 #
 # Twinzo1 <1282055288@qq.com>
