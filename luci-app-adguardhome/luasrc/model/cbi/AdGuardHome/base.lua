@@ -41,14 +41,14 @@ if not fs.access(binpath) then
 	e=e.." "..translate("no core")
 else
 	local version=uci:get("AdGuardHome","AdGuardHome","version")
+	local tmp=luci.sys.exec(binpath.." --version | awk -F \",\" '{print \$2}' | awk -F \" \" '{print \$2}'")
 	local testtime=fs.stat(binpath,"mtime")
-	if testtime~=tonumber(binmtime) or version==nil then
-		local tmp=luci.sys.exec(binpath.." -c /dev/null --check-config 2>&1| grep -m 1 -E 'v[0-9.]+' -o")
-		version=string.sub(tmp, 1, -2)
+	if testtime~=tonumber(binmtime) or version==nil or version ~=tmp then
+		version=tmp
 		if version=="" then version="core error" end
 		uci:set("AdGuardHome","AdGuardHome","version",version)
 		uci:set("AdGuardHome","AdGuardHome","binmtime",testtime)
-		uci:save("AdGuardHome")
+		uci:commit("AdGuardHome")
 	end
 	e=version..e
 end
@@ -304,7 +304,7 @@ function m.on_commit(map)
 				uci:set("AdGuardHome","AdGuardHome","ucitracktest","2")
 			end
 		end
-		uci:save("AdGuardHome")
+		uci:commit("AdGuardHome")
 	end
 end
 return m
