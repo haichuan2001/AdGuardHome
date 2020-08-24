@@ -8,7 +8,7 @@ require("table")
 function gen_template_config()
 	local b
 	local d=""
-	local RESCONF=uci:get_first("dhcp","dnsmasq","resolvfile")
+	local RESCONF=uci:get_first("dhcp","dnsmasq","resolvfile") or "/tmp/resolv.conf.d/resolv.conf.auto"
 	for cnt in io.lines(RESCONF) do
 		b=string.match (cnt,"^[^#]*nameserver%s+([^%s]+)$")
 		if (b~=nil) then
