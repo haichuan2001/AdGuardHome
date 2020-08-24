@@ -10,7 +10,7 @@ LUCI_TITLE:=LuCI support for adguardhome
 PKG_DEPENDS:=+!wget&&!curl:wget
 LUCI_PKGARCH:=all
 PKG_VERSION:=1.8
-PKG_RELEASE:=11
+PKG_RELEASE:=20200824
 PKG_MAINTAINER:=<https://github.com/rufengsuixing/luci-app-adguardhome>
 
 include $(TOPDIR)/feeds/luci/luci.mk

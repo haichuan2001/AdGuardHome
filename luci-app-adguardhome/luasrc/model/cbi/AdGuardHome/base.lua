@@ -44,7 +44,7 @@ else
 	local tmp=luci.sys.exec(binpath.." --version | awk -F \",\" '{print \$2}' | awk -F \" \" '{print \$2}'")
 	local testtime=fs.stat(binpath,"mtime")
 	if testtime~=tonumber(binmtime) or version==nil or version ~=tmp then
-		version=tmp
+		version=string.sub(tmp, 1, -2)
 		if version=="" then version="core error" end
 		uci:set("AdGuardHome","AdGuardHome","version",version)
 		uci:set("AdGuardHome","AdGuardHome","binmtime",testtime)
@@ -167,7 +167,12 @@ o = s:option(Flag, "verbose", translate("Verbose log"))
 o.default = 0
 o.optional = true
 ---- gfwlist 
-local a=luci.sys.call("grep -m 1 -q programadd "..configpath)
+local a
+if fs.access(configpath) then
+a=luci.sys.call("grep -m 1 -q programadd "..configpath)
+else
+a=1
+end
 if (a==0) then
 a="Added"
 else
