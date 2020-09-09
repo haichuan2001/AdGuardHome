@@ -7,7 +7,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-adguardhome1
 PKG_VERSION:=1.8
-PKG_RELEASE:=20200824
+PKG_RELEASE:=20200909
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
@@ -41,22 +41,22 @@ endef
 define Package/luci-app-adguardhome1/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
-	
+
 	$(INSTALL_DIR)  $(1)/etc/uci-defaults
 	$(INSTALL_BIN)  ./files/etc/uci-defaults/* $(1)/etc/uci-defaults
-	
-    $(INSTALL_DIR)  $(1)/etc/config
+
+	$(INSTALL_DIR)  $(1)/etc/config
 	$(INSTALL_BIN)  ./files/etc/config/AdGuardHome1 $(1)/etc/config
-	
-    $(INSTALL_DIR)  $(1)/etc/init.d
+
+	$(INSTALL_DIR)  $(1)/etc/init.d
 	$(INSTALL_BIN)  ./files/etc/init.d/AdGuardHome1 $(1)/etc/init.d
-	
+
 	$(INSTALL_DIR)   $(1)/usr/share/AdGuardHome1
 	$(INSTALL_DATA)  ./root/usr/share/AdGuardHome1/* $(1)/usr/share/AdGuardHome1
-	
+
 	$(INSTALL_DIR)   $(1)/usr/share/rpcd/acl.d/
 	$(INSTALL_DATA)  ./root/usr/share/rpcd/acl.d/* $(1)/usr/share/rpcd/acl.d
-	
+
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	po2lmo ./po/zh-cn/AdGuardHome.po $(1)/usr/lib/lua/luci/i18n/AdGuardHome11.zh-cn.lmo
 endef
@@ -76,8 +76,8 @@ endef
 define Package/luci-app-adguardhome1/prerm
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
-     /etc/init.d/AdGuardHome1 disable
-     /etc/init.d/AdGuardHome1 stop
+	/etc/init.d/AdGuardHome1 disable
+	/etc/init.d/AdGuardHome1 stop
 uci -q batch <<-EOF >/dev/null 2>&1
 	delete ucitrack.@AdGuardHome1[-1]
 	commit ucitrack
