@@ -7,7 +7,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-adguardhome
 PKG_VERSION:=1.8
-PKG_RELEASE:=20200824
+PKG_RELEASE:=20200910
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
@@ -43,13 +43,13 @@ define Package/luci-app-adguardhome/install
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
 
 	$(INSTALL_DIR)  $(1)/etc/uci-defaults
-	$(INSTALL_BIN)  ./files/etc/uci-defaults/* $(1)/etc/uci-defaults
+	$(INSTALL_BIN)  ./root/etc/uci-defaults/* $(1)/etc/uci-defaults
 
 	$(INSTALL_DIR)  $(1)/etc/config
-	$(INSTALL_BIN)  ./files/etc/config/AdGuardHome $(1)/etc/config
+	$(INSTALL_BIN)  ./root/etc/config/AdGuardHome $(1)/etc/config
 
 	$(INSTALL_DIR)  $(1)/etc/init.d
-	$(INSTALL_BIN)  ./files/etc/init.d/AdGuardHome $(1)/etc/init.d
+	$(INSTALL_BIN)  ./root/etc/init.d/AdGuardHome $(1)/etc/init.d
 
 	$(INSTALL_DIR)   $(1)/usr/share/AdGuardHome
 	$(INSTALL_DATA)  ./root/usr/share/AdGuardHome/* $(1)/usr/share/AdGuardHome
