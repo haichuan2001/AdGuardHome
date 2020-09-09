@@ -43,13 +43,13 @@ define Package/luci-app-adguardhome1/install
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
 
 	$(INSTALL_DIR)  $(1)/etc/uci-defaults
-	$(INSTALL_BIN)  ./files/etc/uci-defaults/* $(1)/etc/uci-defaults
+	$(INSTALL_BIN)  ./root/etc/uci-defaults/* $(1)/etc/uci-defaults
 
 	$(INSTALL_DIR)  $(1)/etc/config
-	$(INSTALL_BIN)  ./files/etc/config/AdGuardHome1 $(1)/etc/config
+	$(INSTALL_BIN)  ./root/etc/config/AdGuardHome1 $(1)/etc/config
 
 	$(INSTALL_DIR)  $(1)/etc/init.d
-	$(INSTALL_BIN)  ./files/etc/init.d/AdGuardHome1 $(1)/etc/init.d
+	$(INSTALL_BIN)  ./root/etc/init.d/AdGuardHome1 $(1)/etc/init.d
 
 	$(INSTALL_DIR)   $(1)/usr/share/AdGuardHome1
 	$(INSTALL_DATA)  ./root/usr/share/AdGuardHome1/* $(1)/usr/share/AdGuardHome1
