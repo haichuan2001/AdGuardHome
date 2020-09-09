@@ -41,22 +41,22 @@ endef
 define Package/luci-app-adguardhome/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
-	
+
 	$(INSTALL_DIR)  $(1)/etc/uci-defaults
 	$(INSTALL_BIN)  ./files/etc/uci-defaults/* $(1)/etc/uci-defaults
-	
-    $(INSTALL_DIR)  $(1)/etc/config
+
+	$(INSTALL_DIR)  $(1)/etc/config
 	$(INSTALL_BIN)  ./files/etc/config/AdGuardHome $(1)/etc/config
-	
-    $(INSTALL_DIR)  $(1)/etc/init.d
+
+	$(INSTALL_DIR)  $(1)/etc/init.d
 	$(INSTALL_BIN)  ./files/etc/init.d/AdGuardHome $(1)/etc/init.d
-	
+
 	$(INSTALL_DIR)   $(1)/usr/share/AdGuardHome
 	$(INSTALL_DATA)  ./root/usr/share/AdGuardHome/* $(1)/usr/share/AdGuardHome
-	
+
 	$(INSTALL_DIR)   $(1)/usr/share/rpcd/acl.d/
 	$(INSTALL_DATA)  ./root/usr/share/rpcd/acl.d/* $(1)/usr/share/rpcd/acl.d
-	
+
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
 	po2lmo ./po/zh-cn/AdGuardHome.po $(1)/usr/lib/lua/luci/i18n/AdGuardHome.zh-cn.lmo
 endef
@@ -76,8 +76,8 @@ endef
 define Package/luci-app-adguardhome/prerm
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
-     /etc/init.d/AdGuardHome disable
-     /etc/init.d/AdGuardHome stop
+	/etc/init.d/AdGuardHome disable
+	/etc/init.d/AdGuardHome stop
 uci -q batch <<-EOF >/dev/null 2>&1
 	delete ucitrack.@AdGuardHome[-1]
 	commit ucitrack
