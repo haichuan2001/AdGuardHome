@@ -4,10 +4,10 @@ local http=require"luci.http"
 local uci=require"luci.model.uci".cursor()
 function index()
 entry({"admin", "services", "AdGuardHome1"},alias("admin", "services", "AdGuardHome1", "base"),_("AdGuardHome1"), 10).dependent = true
-entry({"admin","services","AdGuardHome1","base"},cbi("AdGuardHome1/base"),_("Base Setting"),1).leaf = true
-entry({"admin","services","AdGuardHome1","log"},form("AdGuardHome1/log"),_("Log"),2).leaf = true
-entry({"admin","services","AdGuardHome1","manual"},cbi("AdGuardHome1/manual"),_("Manual Config"),3).leaf = true
-entry({"admin","services","AdGuardHome1","status"},call("act_status")).leaf=true
+entry({"admin", "services", "AdGuardHome1", "base"},cbi("AdGuardHome1/base"),_("Base Setting"),1).leaf = true
+entry({"admin", "services", "AdGuardHome1", "log"},form("AdGuardHome1/log"),_("Log"),2).leaf = true
+entry({"admin", "services", "AdGuardHome1", "manual"},cbi("AdGuardHome1/manual"),_("Manual Config"),3).leaf = true
+entry({"admin", "services", "AdGuardHome1", "status"},call("act_status")).leaf=true
 entry({"admin", "services", "AdGuardHome1", "check"}, call("check_update"))
 entry({"admin", "services", "AdGuardHome1", "doupdate"}, call("do_update"))
 entry({"admin", "services", "AdGuardHome1", "getlog"}, call("get_log"))
